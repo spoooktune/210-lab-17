@@ -1,3 +1,6 @@
+// COMSC-210 | Lab 17 | Amrutha Sriprasana
+// Made w/ VSCode
+
 #include <iostream>
 using namespace std;
 
@@ -8,6 +11,12 @@ struct Node {
     Node *next;
 };
 
+// prototypes (may be changed later)
+void addFront(Node *newNode);
+void addBack(Node *newNode);
+void deleteNode (Node *newNode);
+void insertNode (Node *newNode);
+void deleteList();
 void output(Node *);
 
 int main() {
