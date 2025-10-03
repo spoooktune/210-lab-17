@@ -12,19 +12,21 @@ struct Node {
 };
 
 // prototypes (may be changed later)
-void addFront(Node *newNode, float val);
+Node * addFront(Node *newNode, float val);
 void addBack(Node *newNode, float val);
-void deleteNode (Node *headNode);
-void insertNode (Node *headNode, float val);
-void deleteList(Node *headNode);
+Node * deleteNode (Node *headNode);
+Node * insertNode (Node *headNode, float val);
+Node * deleteList(Node *headNode);
 void output(Node *hd);
 
 int main() {
     Node *head = nullptr;
+    int count = 0;
     // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
         int tmp_val = rand() % 100;
-        addFront(head, tmp_val);
+        head = addFront(head, tmp_val);
+
         /*
         Node *newVal = new Node;
         
@@ -69,11 +71,13 @@ int main() {
         current = nullptr;
     }
     */
-    deleteNode(head);
+    
+    head = deleteNode(head);
     output(head);
     
-    /*
+    
     // insert a node
+    /*
     current = head;
     cout << "After which node to insert 10000? " << endl;
     count = 1;
@@ -99,7 +103,8 @@ int main() {
     newnode->next = current;
     prev->next = newnode;
     */
-    insertNode(head, 1000);
+    
+    head = insertNode(head, 1000);
     output(head);
     
     /*
@@ -112,30 +117,30 @@ int main() {
     }
     head = nullptr;
     */
-    deleteList(head);
+
+    head = deleteList(head);
     output(head);
 
     return 0;
 }
 
-void addFront(Node *headNode, float val){
-    Node *newVal = new Node;
+Node * addFront(Node *headNode, float val){
+    Node * newVal = new Node;
     // adds node at head
     if (!headNode) { // if this is the first node, it's the new head
-        headNode = newVal;
         newVal->next = nullptr;
         newVal->value = val;
-        cout << headNode->value;
+        headNode = newVal;
     }
     else { // its a second or subsequent node; place at the head
         newVal->next = headNode;
         newVal->value = val;
         headNode = newVal;
-        cout << headNode->value;1
     }
+    return headNode;
 }
 
-void insertNode(Node *headNode, float val){
+Node * insertNode(Node * headNode, float val){
     Node *current = headNode;
     Node *prev = headNode;
     int entry;
@@ -156,9 +161,11 @@ void insertNode(Node *headNode, float val){
     newnode->value = val;
     newnode->next = current;
     prev->next = newnode;
+
+    return headNode;
 }
 
-void deleteNode(Node *headNode){
+Node * deleteNode(Node * headNode){
     int entry;
     Node * current = headNode;
     output(headNode);
@@ -181,9 +188,11 @@ void deleteNode(Node *headNode){
         delete current;
         current = nullptr;
     }
+
+    return headNode;
 }
 
-void deleteList(Node *headNode){
+Node * deleteList(Node *headNode){
     Node *current = headNode;
     while (current){
         headNode = current->next;
@@ -191,6 +200,7 @@ void deleteList(Node *headNode){
         current = headNode;
     }
     headNode = nullptr;
+    return headNode;
 }
 
 void output(Node * hd) {
