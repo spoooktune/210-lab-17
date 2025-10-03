@@ -14,13 +14,16 @@ struct Node {
 // prototypes (may be changed later)
 void addFront(Node *newNode);
 void addBack(Node *newNode);
-void deleteNode (Node *newNode);
+void deleteNode (Node *headNode);
 void insertNode (Node *newNode);
-void deleteList();
+void deleteList(Node *headNode);
 void output(Node *);
 
 int main() {
     Node *head = nullptr;
+    Node *current = head;
+    Node *prev = head;
+    int entry;
     int count = 0;
 
     // create a linked list of size SIZE with random numbers 0-99
@@ -42,7 +45,7 @@ int main() {
     }
     output(head);
 
-    // deleting a node
+    /* deleting a node
     Node * current = head;
     cout << "Which node to delete? " << endl;
     output(head);
@@ -66,8 +69,11 @@ int main() {
         delete current;
         current = nullptr;
     }
-    output(head);
-
+    */
+    // deleteNode(head);
+    // output(head);
+    
+    /*
     // insert a node
     current = head;
     cout << "After which node to insert 10000? " << endl;
@@ -94,8 +100,10 @@ int main() {
     newnode->next = current;
     prev->next = newnode;
     output(head);
+    */
+    
 
-    // deleting the linked list
+    /* deleting the linked list
     current = head;
     while (current) {
         head = current->next;
@@ -103,9 +111,47 @@ int main() {
         current = head;
     }
     head = nullptr;
+    */
+    deleteList(head);
     output(head);
+    
 
     return 0;
+}
+
+void deleteNode(Node *headNode){
+    int entry;
+    Node * current = headNode;
+    output(headNode);
+    cout << "Choose node to be deleted: ";
+    cin >> entry;
+
+    // traverse array
+    current = headNode;
+    Node *prev = headNode;
+    for (int i = 0; i < (entry-1); i++)
+        if (i == 0)
+            current = current->next;
+        else {
+            current = current->next;
+            prev = prev->next;
+        }
+    // delete current, change pointers
+    if (current) {  
+        prev->next = current->next;
+        delete current;
+        current = nullptr;
+    }
+}
+
+void deleteList(Node *headNode){
+    Node *current = headNode;
+    while (current){
+        headNode = current->next;
+        delete current;
+        current = headNode;
+    }
+    headNode = nullptr;
 }
 
 void output(Node * hd) {
