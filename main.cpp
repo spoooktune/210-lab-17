@@ -11,7 +11,7 @@ struct Node {
     Node *next;
 };
 
-// prototypes (may be changed later)
+// prototypes
 Node * addFront(Node *newNode, float val);
 Node * addBack(Node *newNode, float val);
 Node * deleteNode (Node *headNode);
@@ -28,15 +28,19 @@ int main() {
         head = addFront(head, tmp_val);
     }
 
+    // add node w/ value 9800 to back
     head = addBack(head, 9800);
     output(head);
 
+    // delete node that is selected within function
     head = deleteNode(head);
     output(head);
     
+    // insert node after node selected in function
     head = insertNode(head, 1000);
     output(head);
    
+    // delete full list
     head = deleteList(head);
     output(head);
 
@@ -62,7 +66,8 @@ Node * addFront(Node *headNode, float val){
 
 Node * addBack(Node * headNode, float val){
     Node * newVal = new Node;
-    Node * current = headNode;
+    Node * last = headNode;
+
     // adds node at head
     if (!headNode) { // if this is the first node, it's the new head
         newVal->next = nullptr;
@@ -71,13 +76,12 @@ Node * addBack(Node * headNode, float val){
         cout << headNode->value << endl;
     }
     else {
-        while ((current->next)->next){ // traverses array till next points to nullptr
-            current = current->next;
+        while((last->next) != nullptr){ // goes until last represents the final element (last->next = nullptr)
+            last = last->next;
         }
-        newVal->next = nullptr;
         newVal->value = val;
-        current = newVal;
-        cout << current->value << endl;
+        newVal->next = nullptr;
+        last->next = newVal;
     }
     return headNode;
 }
